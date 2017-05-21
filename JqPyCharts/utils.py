@@ -43,4 +43,4 @@ This `JqPyCharts` was tested with:
 ========================================================================
 
 '''.format(self.__error_type, self.__info, TESTED_HOST_OS)
-      print(self.__txt)
+      print((self.__txt))

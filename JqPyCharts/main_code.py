@@ -274,7 +274,7 @@ def jqpc_get_resources_dict(resource_dict_name):
       raise Err('jqpc_get_resources_dict', [
          'It seems that the specified `resource_dict_name`: <{}>'.format(resource_dict_name),
          '  is not a valid key of `resource_dicts_index`:',
-         '    <{}>'.format(resource_dicts_index.keys()),
+         '    <{}>'.format(list(resource_dicts_index.keys())),
       ])
 
    return resource_dicts_index[resource_dict_name]
@@ -294,7 +294,7 @@ def jqpc_write__resource_dict(dict_name, absolute_source_dir_path, force=False):
          os_makedirs(absolute_source_dir_path, mode=0o777, exist_ok=True)
 
       resource_dict = jqpc_get_resources_dict(dict_name)
-      for file__name, file_data in resource_dict.items():
+      for file__name, file_data in list(resource_dict.items()):
          file_path = path_join(absolute_source_dir_path, file__name)
          if path_isfile(file_path):
             if not force:
@@ -339,7 +339,7 @@ def jqpc_write__selected_resources(dict_name, list_of_resource_names, absolute_s
             raise Err('jqpc_write__selected_resources', [
                'It seems that the specified `resource_name`: <{}>'.format(resource_name),
                '  is not a valid key of `dict_name`: <{}>'.format(dict_name),
-               '    <{}>'.format(resource_dict.keys())
+               '    <{}>'.format(list(resource_dict.keys()))
             ])
 
          file_data = resource_dict[resource_name]
@@ -514,7 +514,7 @@ def jqpc_get_html_jqplotchart_script(chart_id, extra_variables_lines_dict, jqplo
    if 'chart_data' not in extra_variables_lines_dict:
       raise Err('jqpc_get_html_jqplotchart_script', [
          'In the <extra_variables_lines_dict> there must be a key named: <chart_data>.',
-         '   We got: <{}>'.format(extra_variables_lines_dict.keys())
+         '   We got: <{}>'.format(list(extra_variables_lines_dict.keys()))
       ])
    if not isinstance(extra_variables_lines_dict['chart_data'], list):
       raise Err('jqpc_get_html_jqplotchart_script', [
@@ -523,7 +523,7 @@ def jqpc_get_html_jqplotchart_script(chart_id, extra_variables_lines_dict, jqplo
       ])
 
    jqplotchart_script_lines.extend(['   {}var {} = {}'.format(
-      base_indent, var_name, var_value) for var_name, var_value in extra_variables_lines_dict.items()
+      base_indent, var_name, var_value) for var_name, var_value in list(extra_variables_lines_dict.items())
    ])
    jqplotchart_script_lines.append('')
    jqplotchart_script_lines.append('   {base_indent}var plot1 = jQuery.jqplot("{chart_id}", [chart_data],'.format(

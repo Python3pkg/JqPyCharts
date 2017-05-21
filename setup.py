@@ -53,23 +53,23 @@ MAIN_PACKAGE_PATH = path_join(ROOT_PACKAGE_PATH, PACKAGE_NAME)
 from JqPyCharts import TESTED_HOST_OS
 
 if sys_version_info[:2] < (3, 4) or 'linux' not in sys_platform:
-   print('''
+   print(('''
 
       JqPyCharts is only tested with Python 3.4.2rc1 or higher:\n  current python version: {0:d}.{1:d}\n\n
 
       TESTED_HOST_OS: {3:}
-      '''.format(sys_version_info[:2][0], sys_version_info[:2][1], TESTED_HOST_OS))
+      '''.format(sys_version_info[:2][0], sys_version_info[:2][1], TESTED_HOST_OS)))
 
 # check some untested options
 for option_temp in {'bdist_dumb', 'bdist_rpm', 'bdist_wininst', 'bdist_egg'}:
    if option_temp in sys_argv:
-      print('''
+      print(('''
 
          TESTED_HOST_OS you specified an untested option: <{}>\n\n
 
             This might work or might not work correctly
 
-         '''.format(option_temp))
+         '''.format(option_temp)))
 
 
 # ===========================================================================================================================
